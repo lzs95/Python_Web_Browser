@@ -1,3 +1,4 @@
+from imp import reload
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import * 
@@ -25,6 +26,11 @@ class MainWindow(QMainWindow):
         forward_button = QAction("Forward",self)
         forward_button.triggered.connect(self.browser.forward)
         navbar.addAction(forward_button)
+        #Refresh Button
+        reload_button = QAction('Reload',self)
+        reload_button.triggered.connect(self.browser.reload)
+        navbar.addAction(reload_button)
+    
         
      
 # QApplication Handles Events and Initialisation   
