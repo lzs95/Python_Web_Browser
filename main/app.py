@@ -14,7 +14,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.browser)
         super().showMaximized()
     
-
+        
+ 
         #Navbar
         navbar = QToolBar()
         self.addToolBar(navbar)  
@@ -39,7 +40,10 @@ class MainWindow(QMainWindow):
         self.url_bar = QLineEdit()
         self.url_bar.returnPressed.connect(self.navigate_to_url)
         navbar.addWidget(self.url_bar)
-        
+        #Url_Search_Bar
+        # self.url_search_bar = QLineEdit()
+        # self.url_bar.returnPressed.connect(self.search)
+        # navbar.addWidget(self.url_search_bar)
         #Capture URL Chain
         self.browser.urlChanged.connect(self.url_update)
         
@@ -50,10 +54,20 @@ class MainWindow(QMainWindow):
     def navigate_to_url(self):
         #Gets input from url_bar
         url = self.url_bar.text()
-        self.browser.setUrl(QUrl(url))
+        if "https://" in url:
+            self.browser.setUrl(QUrl(url))
+        else:
+            print('not')
+            self.browser.setUrl(QUrl(f"https://{url}.com"))
         
     def url_update(self, url):
         self.url_bar.setText(url.toString())
+        
+    # def search(self):
+    #     url2 = self.url_search_bar.text()
+    #     self.browser.setUrl(QUrl(f"https://duckduckgo.com/?q={url2}&t=h_&ia=web"))
+    #     self.navigate_to_url()
+    
         
     
      
